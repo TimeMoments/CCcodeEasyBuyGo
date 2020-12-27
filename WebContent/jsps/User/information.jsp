@@ -1,0 +1,432 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" %> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+<title>个人资料</title>
+
+		<link href="css/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="https://cdn.bootcss.com/amazeui/2.5.1/css/amazeui.css" rel="stylesheet" type="text/css" />
+
+		<link href="css/personal.css" rel="stylesheet" type="text/css">
+		<link href="css/infstyle.css" rel="stylesheet" type="text/css">
+		<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
+		
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+		
+		<style type="text/css">
+			.footer{
+				border-top: solid rgb(35,194,121);
+			}
+			.filePic{
+				top:0px;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.button_btn_danger{
+				background-color: #dd514c;
+				border:6px solid #dd514c;
+				
+			}
+			
+		</style>
+		
+		<script type="text/javascript">
+		  function imgPreview(fileDom){
+			  //alert("开始实现预览。。。。");
+	           if(window.FileReader){
+	           	var fileReader=new FileReader();
+	           }else{
+	           	 alert("您当前使用的设备不支持，请升级....");
+	           	 return false;
+	           }
+	          // alert("继续");
+	           
+	       	//2.通过js的组合选择器获取到文件域
+	       	var file=fileDom.files[0];
+	       	//alert("file:"+file);
+	       	
+	    	//3.设定一个教验的正则表达式
+	    	var imageType=/^image\//;
+	    	if(!imageType.test(file.type)){
+	    		alert("请选择图片");
+	    		document.getElementById("spid").innerHTML="<input type=\"file\" name=\"image\"  onchange=\"imgPreview(this)\"   id=\"imgFile\"/>";
+	    		alert("文件选择清空了.....");
+	    		return false;
+	    	}
+	       	
+	    	fileReader.onload = function(){ //当文件域中读取完成之后才触发图片标签
+		        //获取图片dom
+		        var img = document.getElementById("preview");
+		        //图片路径设置为读取的图片
+		        //alert("this--->"+this);//从弹框可以看出是FileReader对象
+		        //alert("this.result--->"+this.result);//this.result可以看出是一个data开头的字符串，这段字符串的实质就是 Data URL
+		        img.src = this.result;//相当于是为图片标签设置了src的url值
+		    };
+		    fileReader.readAsDataURL(file);//将文件域标签中的内容显示在图片标签的位置
+		  }
+		  
+		  function checkForm(){
+			//alert("1.文件域的非空验证.....");
+			var imgFileValue=document.getElementById("imgFile").value;
+			//alert("imgFileValue-->"+imgFileValue);
+			if(imgFileValue==""){
+				alert("请选择用户头像");
+				return false;
+			}  
+			  
+			//alert("2.图片的大小验证");
+		    var	imgFileElement=document.getElementById("imgFile");
+		    var fileData=imgFileElement.files[0];
+		    //alert("fileData:"+fileData);
+		    var size=fileData.size;
+			//alert("size:"+size);
+			if(size>1024*1024){
+				alert("您本次上传的图片超过1MB了,请选择一个小点的再上传.....");
+				return false;
+			} 
+		  }
+		  
+		  function doAjax() {
+				//1.获取到管理员的姓名
+				var gname=$("#gname").val();
+				var url = "<%=request.getContextPath()%>/manage/manager.do?method=queryAjax";
+				$.post(url,{manager_name:gname},function(data){
+					tianxie(data);
+				})
+			}
+			
+			function tianxie(flag){
+				if("no"==flag){
+					$("#gname").html(alert("该管理员名称已存在，请更改名称！"));
+					return false;
+				}
+				
+			}
+			function retianxie(){
+				
+				//$("#gname").html("");
+				//$("#gname").val("");
+				//document.getElementById("gname").value="";
+				
+			}
+			
+			
+		</script>
+</head>
+<body>
+		<!--头 -->
+		 <header>
+			<article>
+				<div class="mt-logo">
+					<!--顶部导航条 -->
+					<div class="header-top">
+						<div class="am-container header">
+							<ul class="message-l">
+								<div class="topMessage">
+								</div>
+								<div class="topMessage">
+									<div class="menu-hd">
+									</div>
+								</div>
+							</ul>
+							<ul class="message-r">
+								<div class="topMessage my-shangcheng">
+									<div class="menu-hd MyShangcheng">
+										<a href="#" target="_top">会员中心</a>
+									</div>
+								</div>
+								<div class="topMessage mini-cart">
+									<div class="menu-hd">
+										<a id="mc-menu-hd" href="#" target="_top">
+										<span>商户中心</span>
+										<strong id="J_MiniCartNum" class="h"></strong>
+										</a>
+									</div>
+								</div>
+								<div class="topMessage favorite">
+									<div class="menu-hd">
+										<a href="#" target="_top">
+										<span>帮助</span>
+										</a>
+									</div>
+								</div>
+							</ul>
+						</div>
+					</div>
+
+						<!--悬浮搜索框-->
+
+						<div class="nav white">
+							<div class="logoBig">
+							</div>
+
+							<div class="search-bar pr">
+								<a name="index_none_header_sysc" href="#"></a>
+								<form>
+									<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+									<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+								</form>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+					</div>
+				</div>
+			</article>
+		</header>
+            <div class="nav-table">
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+								<li class="index"><a href="<%=request.getContextPath()%>/indextow.jsp">首页</a></li>
+							</ul>
+						    
+						</div>
+			</div>
+			<b class="line"></b> 
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-info">
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
+						</div>
+						<hr/>
+
+						<!--头像 -->
+						<div class="user-infoPic">
+
+							<div class="filePic">
+								<span id="spid">
+									<input type="file" name="image" class="inputPic" onchange="imgPreview(this)"  allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" id="imgFile" >
+								</span>
+								<img id="preview" class="am-circle am-img-thumbnail" src="images/getAvatar.do.jpg" alt="" />
+							</div>
+							
+							<p class="am-form-help">头像</p>
+							<div class="info-m">
+								<div><b>用户名：
+								<i>
+									<%=((Map)session.getAttribute("map_personal")).get("personal_name")%>
+								</i></b></div>
+								<div class="u-level">
+									<span class="rank r2">
+							             <s class="vip1"></s><a class="classes" href="#">铜牌会员</a>
+						            </span>
+								</div>
+	
+								<div class="u-safety">
+									<a href="<%=request.getContextPath()%>/User/personalsafety.do?method=querySafety&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>">
+									 账户安全
+									<span class="u-profile"><i class="bc_ee0000" style="width: 60px;" width="0">60分</i></span>
+									</a>
+								</div>
+								
+							</div>
+		
+						</div>
+
+						<!--个人信息 -->
+						<div class="info-main">
+							<form name="form1" method="post" action="<%=request.getContextPath()%>/User.do?method=edit&id=<%=((Map)session.getAttribute("map_personal")).get("user_id")%>" onsubmit="return checkForm()" >
+								<div class="am-form-group">
+									<label for="user-name2" class="am-form-label">昵称:</label>
+									<div class="am-form-content">
+										<input type="text" class="form-control"  name="name" value="${map_personal.personal_name }" placeholder="nickname">
+									</div>
+								</div>
+<!--
+								<div class="am-form-group">
+									<label for="user-name" class="am-form-label">姓名</label>
+									<div class="am-form-content">
+										<input type="text" id="user-name2" placeholder="name">
+
+									</div>
+								</div>
+  -->
+								<div class="am-form-group">
+									<label class="am-form-label">性别:</label>
+									<div class="am-form-content sex">
+										<!--
+										<label class="am-radio-inline">
+											<input type="radio"  name="personal_sex" value="male" data-am-ucheck> 男
+										</label>
+										<label class="am-radio-inline">
+											<input type="radio" name="personal_sex" value="female" data-am-ucheck> 女
+										</label>
+										<label class="am-radio-inline">
+											<input type="radio" name="personal_sex" value="secret" data-am-ucheck> 保密
+										</label>
+										  -->
+										  <input type="text" class="form-control"  name="personal_sex" value="${map_personal.personal_sex }" placeholder="sex">
+									</div>
+								</div>
+
+								<div class="am-form-group">
+									<label for="user-birth" class="am-form-label">生日:</label>
+									<div class="am-form-content birth">
+										<!--  
+										<div class="birth-select">
+											<select data-am-selected>
+												<option value="a">2015</option>
+												<option value="b">1987</option>
+											</select>
+											<em>年</em>
+										</div>
+										<div class="birth-select2">
+											<select data-am-selected>
+												<option value="a">12</option>
+												<option value="b">8</option>
+											</select>
+											<em>月</em></div>
+										<div class="birth-select2">
+											<select data-am-selected>
+												<option value="a">21</option>
+												<option value="b">23</option>
+											</select>
+											<em>日</em></div>
+											
+											-->
+											
+										<input type="text" class="form-control" value="${map_personal.personal_date }" name="personal_date" placeholder="请输入出生日期">
+									</div>
+							
+								</div>
+								<div class="am-form-group">
+									<label for="user-phone" class="am-form-label">电话:</label>
+									<div class="am-form-content">
+										<input id="user-phone" class="form-control"  name="personal_phone" value="${map_personal.personal_phone}" placeholder="telephonenumber" type="tel">
+
+									</div>
+								</div>
+								<div class="am-form-group">
+									<label for="user-email" class="am-form-label">电子邮件:</label>
+									<div class="am-form-content">
+										<input id="user-email" class="form-control"  value="${map_personal.personal_email }" name="personal_email" placeholder="Email" type="email">
+
+									</div>
+								</div>
+							<!-- 
+								<div class="am-form-group address">
+									<label for="user-address" class="am-form-label">收货地址</label>
+									<div class="am-form-content address">
+										<a href="address.html">
+											<p class="new-mu_l2cw">
+												<span class="province">湖北</span>省
+												<span class="city">武汉</span>市
+												<span class="dist">洪山</span>区
+												<span class="street">雄楚大道666号(中南财经政法大学)</span>
+												<span class="am-icon-angle-right"></span>
+											</p>
+										</a>
+
+									</div>
+								</div>
+								<div class="am-form-group safety">
+									<label for="user-safety" class="am-form-label">账号安全</label>
+									<div class="am-form-content safety">
+										<a href="safety.html">
+
+											<span class="am-icon-angle-right"></span>
+
+										</a>
+
+									</div>
+								</div>
+						 -->
+								<div class="info-btn">
+									<div class="am-btn am-btn-danger">
+										<input class="button_btn_danger"  type="submit" value="保存修改"/>
+									</div>
+								</div>
+							</form>
+						</div>
+
+					</div>
+
+				</div>
+				<!--底部-->
+				 <div class="footer">
+					<div class="footer-hd">
+						<p>
+							<a href="#">轻松购</a>
+							<b>|</b>
+							<a href="<%=request.getContextPath()%>/indextow.jsp">商城首页</a>
+							<b>|</b>
+							<a href="#">支付宝</a>
+							<b>|</b>
+							<a href="#">物流</a>
+						</p>
+					</div>
+					<div class="footer-bd">
+						<p>
+							<a href="#">关于轻松购</a>
+							<a href="#">合作伙伴</a>
+							<a href="#">联系我们</a>
+							<a href="#">网站地图</a>
+							<em>© 2016-2026 XXXX 版权所有 <a href="http://www.cssmoban.com/" target="_blank" title="版权所有">版权所有</a> - Collect from</em>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<aside class="menu">
+				<ul>
+					<li class="person">
+						<a href="#">个人中心</a>
+					</li>
+					<li class="person">
+						<a href="#">个人资料</a>
+						<ul>
+							<li class="active"> <a href="<%=request.getContextPath()%>/User/personalInformation.do?method=query&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>">个人信息</a></li>
+							<li> <a href="<%=request.getContextPath()%>/jsps/User/personal/safety/safety.jsp">安全设置</a></li>
+							<li> <a href="<%=request.getContextPath() %>/jsps/User/address.jsp">收货地址</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的交易</a>
+						<ul>
+							<li><a href="<%=request.getContextPath() %>/jsps/User/order.jsp">订单管理</a></li>
+							<li> <a href="<%=request.getContextPath() %>/jsps/User/change.jsp">退款售后</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的资产</a>
+						<ul>
+							<li> <a href="coupon.html">优惠券 </a></li>
+							<li> <a href="bonus.html">红包</a></li>
+							<li> <a href="bill.html">账单明细</a></li>
+						</ul>
+					</li>
+
+					<li class="person">
+						<a href="#">我的小窝</a>
+						<ul>
+							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="foot.html">足迹</a></li>
+							<li> <a href="comment.html">评价</a></li>
+							<li> <a href="news.html">消息</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</aside>
+		</div>
+
+	</body>
+</html>

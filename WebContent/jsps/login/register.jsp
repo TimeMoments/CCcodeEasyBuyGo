@@ -1,0 +1,261 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册页面</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/bootstrap-select.css">
+<link href="../../css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript">
+		addEventListener("load",
+							function(){
+										setTimeout(hideURLbar, 0);
+							}, false);
+							function hideURLbar(){
+										window.scrollTo(0,1);
+							}
+</script>
+<!-- //for-mobile-apps -->
+<!--fonts-->
+<link href='http://fonts.useso.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!--//fonts-->	
+<!-- js -->
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<!-- js -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/bootstrap-select.js"></script>
+<script src="../../js/jquery.js"></script>
+<script>
+  $(document).ready(function () {
+    var mySelect = $('#first-disabled2');
+
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+  });
+</script>
+
+<script type="text/javascript">
+		function checkForm(){
+			//alert("1.文件域的非空验证.....");
+			var gnameName=document.getElementById("gname").value;
+			var gnameName=document.getElementById("pass").value;
+			var gnamePass_again=document.getElementById("pass_again").value;
+			var gnameEmail=document.getElementById("Email").value;
+			
+			if(gnameName==""){
+				alert("请输入用户名");
+				return false;
+			}else if (gnameName=="") {
+				alert("请输入密码");
+				return false;
+			}else if (gnamePass_again=="") {
+				alert("请输入确认密码");
+				return false;
+			}else if (gnameEmail=="") {
+				alert("请输入邮箱");
+				return false;
+			}else if (gnameName!=gnamePass_again) {
+				alert("您输入的密码和确认密码不一致，请检查后重新输入");
+				return false;
+			}
+			 
+		 }
+		function doAjax() {
+			//1.获取到管理员的姓名
+			var gname=$("#gname").val();
+			var url = "<%=request.getContextPath()%>/register.do?method=queryAjax";
+			$.post(url,{username:gname},function(data){
+				tianxie(data);
+			})
+		}
+		
+		function tianxie(flag){
+			if("no"==flag){
+				$("#gname").html(alert("该用户名称已存在，请更改名称！"));
+				return false;
+			}
+			
+		}
+		function retianxie(){
+			
+			//$("#gname").html("");
+			
+			//$("#gname").val("");
+			//document.getElementById("gname").value="";
+			
+		}
+
+</script>
+<script type="text/javascript" src="../../js/jquery.leanModal.min.js"></script>
+<link href="../../css/jquery.uls.css" rel="stylesheet"/>
+<link href="../../css/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="../../css/jquery.uls.lcd.css" rel="stylesheet"/>
+<!-- Source -->
+<script src="../../js/jquery.uls.data.js"></script>
+<script src="../../js/jquery.uls.data.utils.js"></script>
+<script src="../../js/jquery.uls.lcd.js"></script>
+<script src="../..//jquery.uls.languagefilter.js"></script>
+<script src="../../js/jquery.uls.regionfilter.js"></script>
+<script src="../../js/jquery.uls.core.js"></script>
+<script>
+			$( document ).ready( function() {
+				$( '.uls-trigger' ).uls( {
+					onSelect : function( language ) {
+						var languageName = $.uls.data.getAutonym( language );
+						$( '.uls-trigger' ).text( languageName );
+					},
+					quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+				} );
+			} );
+		</script>
+</head>
+<body>
+<div class="header">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html"><span>轻松</span>购</a>
+			</div>
+			<div class="header-right">
+			
+		
+	<!-- Large modal -->
+			<div class="selectregion">
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+					aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+										&times;</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				<script>
+				$('#myModal').modal('');
+				</script>
+			</div>
+		</div>
+		</div>
+	</div>
+	 <section>
+			<div id="page-wrapper" class="sign-in-wrapper">
+				<div class="graphs">
+					<div class="sign-up">
+						<h1>申请一个新账号</h1>
+						<p class="creating">
+							Easy Shopping Easy shopping easy, your only choice.<br />
+								Hurry up and register!
+						</p>
+						<h2>个人信息</h2>
+			<form name="form1" method="post" action="<%=request.getContextPath() %>/register.do?method=register" onsubmit="return checkForm(form1)">
+						<div class="sign-u">
+							<div class="sign-up1">
+								<h4>用户名*:</h4>
+							</div>
+							<div class="sign-up2">
+							
+									<input type="text" placeholder="请输入用户名" name="username"  id="gname"  onblur="doAjax()"  onfocus="retianxie()"   required=" "/>
+							
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="sign-u">
+							<div class="sign-up1">
+								<h4>密码*:</h4>
+							</div>
+							<div class="sign-up2">
+								
+									<input type="password" name="password" id="pass" placeholder="请输入密码"  required=" "/>
+								
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="sign-u">
+							<div class="sign-up1">
+								<h4>确认密码*:</h4>
+							</div>
+							<div class="sign-up2">
+								
+									<input type="password" id="pass_again"    placeholder="再次输入密码"    required=" "/>
+								
+							</div>
+							
+							<div class="sign-u">
+							<div class="sign-up1">
+							<br>
+								<h4>电子邮箱*:</h4>
+							</div>
+							<div class="sign-up2">
+								 <td> <!-- <input type="text" id="ema" name="email" value="2669333860@qq.com"/></td> -->
+									<input type="text" name="email"  placeholder="请输入邮箱"  id="Email" required=" "    />
+								<p id="tishi"></p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="sub_home">
+							<div class="sub_home_left">
+								
+									<input type="submit" value="注册">
+								
+							</div>
+							<div class="sub_home_right">
+								<p>返回<a href="<%=request.getContextPath() %>/index.jsp">首页</a></p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+							</form>
+					</div>
+					
+				
+				</div>
+					
+			</div>
+	
+	</section>
+	
+	
+	<script type="text/javascript">
+			$("#Email").keyup(function(){
+				var emailReg=/^\w+@[0-9a-z]+\.[a-z]+$/;
+				var email=document.getElementById("Email").value
+				if(email.length>=13 && email.length<=26){
+					if(emailReg.test(email)){
+						$("#tishi").text("邮箱可用")
+						$("#tishi").css("color","green")
+					}
+					else{
+						$("#tishi").text("邮箱不可用")
+						$("#tishi").css("color","red")
+					}
+				}
+				else{
+					$("#tishi").text("长度太短")
+					$("#tishi").css("color","red")
+					
+				}
+			})
+		</script>
+</body>
+</html>

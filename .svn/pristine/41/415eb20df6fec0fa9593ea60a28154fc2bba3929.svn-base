@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>CCcoder</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+ 	<servlet-name>LoginServlet</servlet-name>
+ 	<servlet-class>turing.manage.login.LoginServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>LoginServlet</servlet-name>
+ 	<url-pattern>/login.do</url-pattern>
+ </servlet-mapping>
+ 
+ 
+ 
+  <servlet>
+ 	<servlet-name>LiebiaoServlet</servlet-name>
+ 	<servlet-class>turing.manage.manager.shangpinliebiao.LiebiaoServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>LiebiaoServlet</servlet-name>
+ 	<url-pattern>/shangpinliebiao.do</url-pattern>
+ </servlet-mapping>
+
+
+  <servlet>
+ 	<servlet-name>PingLunServelt</servlet-name>
+ 	<servlet-class>turing.manage.manager.pinglun.PingLunServelt</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>PingLunServelt</servlet-name>
+ 	<url-pattern>/pinglun.do</url-pattern>
+ </servlet-mapping>
+
+ 
+ 
+ <servlet>
+ 	<servlet-name>CommodityServlet</servlet-name>
+ 	<servlet-class>turing.manage.commodity.CommodityServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>CommodityServlet</servlet-name>
+ 	<url-pattern>/commodity.do</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet>
+ 	<servlet-name>CommodityRServlet</servlet-name>
+ 	<servlet-class>turing.manage.commodityread.CommodityRServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>CommodityRServlet</servlet-name>
+ 	<url-pattern>/jsps/commodityR.do</url-pattern>
+ </servlet-mapping>
+ 
+ 
+  <servlet>
+ 	<servlet-name>ManagerServlet</servlet-name>
+ 	<servlet-class>turing.manage.manager.ManagerServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>ManagerServlet</servlet-name>
+ 	<url-pattern>/manager.do</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet>
+ 	<servlet-name>CategoryServlet</servlet-name>
+ 	<servlet-class>turing.manage.category.CategoryServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>CategoryServlet</servlet-name>
+ 	<url-pattern>/jsps/category.do</url-pattern>
+ </servlet-mapping>
+ 
+ 
+  <servlet>
+ 	<servlet-name>PersonalServlet</servlet-name>
+ 	<servlet-class>turing.manage.User.personalInformation.PersonalServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>PersonalServlet</servlet-name>
+ 	<url-pattern>/User/personalInformation.do</url-pattern>
+ </servlet-mapping>
+ 
+ 
+ 
+ 
+ <servlet>
+ 	<servlet-name>PersonalSafetyServlet</servlet-name>
+ 	<servlet-class>turing.manage.User.personalsafety.PersonalSafetyServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>PersonalSafetyServlet</servlet-name>
+ 	<url-pattern>/User/personalsafety.do</url-pattern>
+ </servlet-mapping>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <filter>
+ 	<filter-name>SessionFulter</filter-name>
+ 	<filter-class>turing.manage.filter.SessionFulter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>SessionFulter</filter-name>
+ 	<url-pattern>/manage/*</url-pattern>
+ </filter-mapping>
+ 
+ <filter>
+ 	<filter-name>CharacterEncodingFilter</filter-name>
+ 	<filter-class>turing.manage.filter.CharacterEncodingFilter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>CharacterEncodingFilter</filter-name>
+ 	<url-pattern>/manage/*</url-pattern>
+ </filter-mapping>
+ 
+ 
+  <servlet>
+ 	<servlet-name>Registerservlet</servlet-name>
+ 	<servlet-class>turing.manage.register.Registerservlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>Registerservlet</servlet-name>
+ 	<url-pattern>/register.do</url-pattern>
+ </servlet-mapping>
+ 
+ 
+ 
+</web-app>
