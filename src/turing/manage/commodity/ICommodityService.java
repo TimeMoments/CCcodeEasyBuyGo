@@ -3,6 +3,7 @@ package turing.manage.commodity;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +20,8 @@ public interface ICommodityService {
 	void addcommodity(String user_id, String commodity_id, String commodity_name, String commodity_text,
 			String commodity_remark, String commodity_price, String commodity_degree, String commodity_sum,
 			String commodity_way, String virtualPath) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException;
+	List<Map<String, Object>> queryTag() throws ClassNotFoundException, SQLException;
+	List<Map<String, Object>> querydeal() throws ClassNotFoundException, SQLException;
 
 	
 

@@ -411,7 +411,7 @@
 					<li class="person">
 						<ul>
 							<a href="<%=request.getContextPath()%>/User/personalInformation.do?method=query&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>" >个人信息</a>
-							<li> <a href="<%=request.getContextPath()%>/User/personalsafety.do?method=querySafety&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>">安全设置</a></li>
+					   <li> <a href="<%=request.getContextPath()%>/User/personalsafety.do?method=querySafety&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>">安全设置</a></li> 
 							<li> <a href="<%=request.getContextPath()%>/jsps/User/address.jsp">收货地址</a></li>
 						</ul>
 					</li>

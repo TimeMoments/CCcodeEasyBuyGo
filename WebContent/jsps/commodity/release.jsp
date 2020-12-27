@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -125,14 +126,31 @@
 			        <input type="text" name="commodity_name"class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入">
 			      </div>
 			    </div>
+			    
 			    <div class="am-form-group am-cf">
-			      <div class="zuo">关键词：</div>
+			      <div class="zuo">商品类别：</div>
 			      <div class="you">
-			        <input type="text" name="commodity_text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+				<select name="commodity_text" class="am-input-sm" id="doc-ipt-email-1">
+				<option value="%">查询所有</option>
+				<% 
+				List list_tag_name=(List)request.getAttribute("list_tag_name");
+				for(int i=0;i<list_tag_name.size();i++){
+					Map map_tag_name=(Map)list_tag_name.get(i);
+					String tag_name=(String)map_tag_name.get("tag_name");
+				
+				%>
+				<option value="<%=tag_name%>"><%=tag_name%></option>
+				<% 
+				}
+				%>
+				
+				</select>
 			      </div>
 			    </div>
+			    
+
 			    <div class="am-form-group am-cf">
-			      <div class="zuo">描述：</div>
+			      <div class="zuo">商品描述：</div>
 			      <div class="you">
 			      <input type="text" name="commodity_remark"class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入">
 			      </div>
@@ -165,11 +183,25 @@
 			    </div>
 			    
 			    <div class="am-form-group am-cf">
-			      <div class="zuo">交易方式：</div>
+			      <div class="zuo">支持的交易方式</div>
 			      <div class="you">
-			       <input type="text" name="commodity_way"class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入">
-			      </div>
+				<select name="commodity_way" class="am-input-sm" id="doc-ipt-email-1">
+				<option value="%">查询所有</option>
+				<% 
+				List list_deal_way=(List)request.getAttribute("list_deal_way");
+				for(int i=0;i<list_deal_way.size();i++){
+					Map map_deal_way=(Map)list_deal_way.get(i);
+					String deal_way=(String)map_deal_way.get("deal_way");
+				
+				%>
+				<option value="<%=deal_way%>"><%=deal_way%></option>
+				<% 
+				}
+				%>
+				
+				</select>			      </div>
 			    </div>
+
 			    
 			    <div class="am-form-group am-cf">
 			      <div class="zuo">产品图片：</div>

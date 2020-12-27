@@ -11,7 +11,7 @@
 
 <title>个人资料</title>
 
-		<link href="css/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
 		<link href="https://cdn.bootcss.com/amazeui/2.5.1/css/amazeui.css" rel="stylesheet" type="text/css" />
 
 		<link href="css/personal.css" rel="stylesheet" type="text/css">
@@ -211,9 +211,11 @@
 						<div class="user-infoPic">
 
 							<div class="filePic">
+						<!--  
 								<span id="spid">
 									<input type="file" name="image" class="inputPic" onchange="imgPreview(this)"  allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" id="imgFile" >
 								</span>
+						-->
 								<img id="preview" class="am-circle am-img-thumbnail" src="images/getAvatar.do.jpg" alt="" />
 							</div>
 							
@@ -242,11 +244,17 @@
 
 						<!--个人信息 -->
 						<div class="info-main">
-							<form name="form1" method="post" action="<%=request.getContextPath()%>/User.do?method=edit&id=<%=((Map)session.getAttribute("map_personal")).get("user_id")%>" onsubmit="return checkForm()" >
+							<form name="form1" method="post" action="<%=request.getContextPath()%>/User/personalInformation.do?method=edit&id=<%=((Map)session.getAttribute("map_personal")).get("user_id")%>" onsubmit="return checkForm()" >
 								<div class="am-form-group">
 									<label for="user-name2" class="am-form-label">昵称:</label>
 									<div class="am-form-content">
 										<input type="text" class="form-control"  name="name" value="${map_personal.personal_name }" placeholder="nickname">
+									</div>
+								</div>
+								<div class="am-form-group">
+									<label for="user-name2" class="am-form-label">头像:</label>
+									<div class="am-form-content">
+										<span id="spid"><input   type="file"   name="image"  onchange="imgPreview(this)" accept="image/*"   id="imgFile"/>
 									</div>
 								</div>
 <!--

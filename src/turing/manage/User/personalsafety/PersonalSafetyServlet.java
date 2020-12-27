@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -113,7 +112,7 @@ private void querySafety(HttpServletRequest request, HttpServletResponse respons
 	session.setAttribute("map_personal", map_personal);
 //	request.setAttribute("map_personal", map_personal);
 	//转向
-	request.getRequestDispatcher("/jsps/User/safety.jsp").forward(request, response);
+	request.getRequestDispatcher("/jsps/User/personal/safety/safety.jsp").forward(request, response);
 }
 
 }

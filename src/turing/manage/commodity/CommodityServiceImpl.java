@@ -85,6 +85,18 @@ public class CommodityServiceImpl implements ICommodityService {
 		
 	}
 
+	@Override
+	public List<Map<String, Object>> queryTag() throws ClassNotFoundException, SQLException {
+		String sql="select * from tag";
+		return dao.executeQueryForList(sql);
+	}
+
+	@Override
+	public List<Map<String, Object>> querydeal() throws ClassNotFoundException, SQLException {
+		String sql="select * from deal_way";
+		return dao.executeQueryForList(sql);
+	}
+
 	
 	
 

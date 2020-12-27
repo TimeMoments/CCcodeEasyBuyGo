@@ -27,11 +27,11 @@ public class PersonalServiceImpl implements IPersonalService{
 
 	@Override
 	public void saveEdit(String user_id, String personal_name, String personal_sex, String personal_date,
-			String personal_phone, String personal_email) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
+			String personal_phone, String personal_email,String virtualPath) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
 		String sql = " update personal set personal_name='"+personal_name+"',"
 				+ "personal_sex='"+personal_sex+"',personal_date='"+personal_date+"'"
 				+ ",personal_phone='"+personal_phone+"',personal_email='"+personal_email+"'"
-				+ "  where  user_id='"+user_id+"' ";
+				+ ",user_image='"+virtualPath+"'  where  user_id='"+user_id+"' ";
 		dao.executeUpdate(sql);
 	}
 	

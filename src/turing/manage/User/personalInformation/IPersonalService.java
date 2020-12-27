@@ -16,7 +16,7 @@ public interface IPersonalService {
 	Map<String, Object> queryPersonal(String user_id) throws ClassNotFoundException, SQLException;
 
 	void saveEdit(String user_id, String personal_name, String personal_sex, String personal_date,
-			String personal_phone, String personal_email) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException;
+			String personal_phone, String personal_email,String virtualPath) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException;
 	
 	
 	

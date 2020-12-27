@@ -56,10 +56,21 @@ public class CommodityServlet extends HttpServlet{
 			else if(method.equals("upload")){
 				this.upload(request,response);
 			}
+			else if(method.equals("query")){
+				this.query(request,response);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+		/**
+	 * 查询展示下拉框数据
+	 * @param request
+	 * @param response
+	 */
+	private void query(HttpServletRequest request, HttpServletResponse response) {
+
 	}
 	/**
 	 * @desc  跳转发布页面
@@ -67,13 +78,21 @@ public class CommodityServlet extends HttpServlet{
 	 * @param response
 	 * @throws IOException 
 	 * @throws ServletException 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	private void addcommodityPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void addcommodityPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException {
 		//转入添加页面
 		System.out.println("——————————进入添加页面");
+		
+		List<Map<String, Object>> list_tag_name = CommodityService.queryTag();
+		List<Map<String, Object>> list_deal_way = CommodityService.querydeal();
+		
 		user_id=request.getParameter("user_id");
 		System.out.println("user_id:"+user_id);
 		request.setAttribute("user_id", user_id);
+		request.setAttribute("list_tag_name", list_tag_name);
+		request.setAttribute("list_deal_way", list_deal_way);
 		//session.setAttribute("user_id", user_id);
 		request.getRequestDispatcher("/jsps/commodity/release.jsp").forward(request, response);
 	}
@@ -200,6 +219,8 @@ public class CommodityServlet extends HttpServlet{
 
 						//6.重定向
 						response.sendRedirect(request.getContextPath()+"/indextow.jsp");
+						
+
 					}
 				}
 			}
