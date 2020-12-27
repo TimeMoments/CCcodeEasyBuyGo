@@ -29,34 +29,30 @@ public class PersonalServiceImpl implements IPersonalService{
 	public void saveEdit(String personal_id,String user_id, String personal_name, String personal_sex, String personal_date,
 			String personal_phone, String personal_email,String virtualPath) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
 		
-		String sql="update  personal  set  personal_id='"+personal_id+"'"
-				+ ",personal_name='"+personal_name+"',personal_sex='"+personal_sex+"' "
-				+ ",personal_date='"+personal_date+"',personal_phone='"+personal_phone+"'"
-				+ ",personal_email='"+personal_email+"',personal_image='"+virtualPath+"'"
-				+ "   where user_id='"+user_id+"'";
+		String sql="update personal commoditypass values(?,?,?,?,?,?,?,?)";
 		
-//		int [] types = new int[8];
-//		types[0] = Types.VARCHAR;
-//		types[1] = Types.VARCHAR;
-//		types[2] = Types.VARCHAR;
-//		types[3] = Types.VARCHAR;
-//		types[4] = Types.VARCHAR;
-//		types[5] = Types.VARCHAR;
-//		types[6] = Types.VARCHAR;
-//		types[7] = Types.VARCHAR;
-//		
-//		Object[] values = new Object[8];
-//		values[0] = personal_id;
-//		values[1] = user_id;
-//		values[2] = personal_name;
-//		values[3] = personal_sex;
-//		values[4] = personal_date;
-//		values[5] = personal_phone;
-//		values[6] = personal_email;
-//		values[7] = virtualPath;
+		int [] types = new int[10];
+		types[0] = Types.VARCHAR;
+		types[1] = Types.VARCHAR;
+		types[2] = Types.VARCHAR;
+		types[3] = Types.VARCHAR;
+		types[4] = Types.VARCHAR;
+		types[5] = Types.VARCHAR;
+		types[6] = Types.VARCHAR;
+		types[7] = Types.VARCHAR;
+		
+		Object[] values = new Object[8];
+		values[0] = personal_id;
+		values[1] = user_id;
+		values[2] = personal_name;
+		values[3] = personal_sex;
+		values[4] = personal_date;
+		values[5] = personal_phone;
+		values[6] = personal_email;
+		values[7] = virtualPath;
 
 		
-		dao.executeUpdate(sql);
+		dao.executeUpdate(sql, types, values);
 	}
 	
 	

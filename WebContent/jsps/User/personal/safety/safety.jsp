@@ -1,0 +1,347 @@
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>安全设置</title>
+
+		<link href="<%=request.getContextPath()%>/jsps/User/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="https://cdn.bootcss.com/amazeui/2.5.1/css/amazeui.css" rel="stylesheet" type="text/css" />
+
+		<link href="<%=request.getContextPath()%>/jsps/User/css/personal.css" rel="stylesheet" type="text/css">
+		<link href="<%=request.getContextPath()%>/jsps/User/css/infstyle.css" rel="stylesheet" type="text/css">
+		
+		<style type="text/css">
+			.footer{
+				border-top: solid rgb(35,194,121);
+			}
+			.filePic{
+				top:0px;
+				margin: 0px;
+				padding: 0px;
+			}
+		</style>
+		<script type="text/javascript">
+		  function imgPreview(fileDom){
+			  //alert("开始实现预览。。。。");
+	           if(window.FileReader){
+	           	var fileReader=new FileReader();
+	           }else{
+	           	 alert("您当前使用的设备不支持，请升级....");
+	           	 return false;
+	           }
+	          // alert("继续");
+	           
+	       	//2.通过js的组合选择器获取到文件域
+	       	var file=fileDom.files[0];
+	       	//alert("file:"+file);
+	       	
+	    	//3.设定一个教验的正则表达式
+	    	var imageType=/^image\//;
+	    	if(!imageType.test(file.type)){
+	    		alert("请选择图片");
+	    		document.getElementById("spid").innerHTML="<input type=\"file\" name=\"image\"  onchange=\"imgPreview(this)\"   id=\"imgFile\"/>";
+	    		alert("文件选择清空了.....");
+	    		return false;
+	    	}
+	       	
+	    	fileReader.onload = function(){ //当文件域中读取完成之后才触发图片标签
+		        //获取图片dom
+		        var img = document.getElementById("preview");
+		        //图片路径设置为读取的图片
+		        //alert("this--->"+this);//从弹框可以看出是FileReader对象
+		        //alert("this.result--->"+this.result);//this.result可以看出是一个data开头的字符串，这段字符串的实质就是 Data URL
+		        img.src = this.result;//相当于是为图片标签设置了src的url值
+		    };
+		    fileReader.readAsDataURL(file);//将文件域标签中的内容显示在图片标签的位置
+		  }
+		  
+		  function checkForm(){
+			//alert("1.文件域的非空验证.....");
+			var imgFileValue=document.getElementById("imgFile").value;
+			//alert("imgFileValue-->"+imgFileValue);
+			if(imgFileValue==""){
+				alert("请选择用户头像");
+				return false;
+			}  
+			  
+			//alert("2.图片的大小验证");
+		    var	imgFileElement=document.getElementById("imgFile");
+		    var fileData=imgFileElement.files[0];
+		    //alert("fileData:"+fileData);
+		    var size=fileData.size;
+			//alert("size:"+size);
+			if(size>1024*1024){
+				alert("您本次上传的图片超过1MB了,请选择一个小点的再上传.....");
+				return false;
+			} 
+		  }
+		  
+			
+		</script>
+	</head>
+
+	<body>
+		<!--头 -->
+		<header>
+			<article>
+				<div class="mt-logo">
+					<!--顶部导航条 -->
+					<div class="am-container header">
+						<ul class="message-l">
+							<div class="topMessage">
+								<div class="menu-hd">
+								</div>
+							</div>
+						</ul>
+						<ul class="message-r">
+							<div class="topMessage home">
+								<div class="menu-hd">
+									<a href="<%=request.getContextPath() %>/indextow.jsp" target="_top" class="h">
+									商城首页
+									</a>
+								</div>
+							</div>
+							<div class="topMessage my-shangcheng">
+								<div class="menu-hd MyShangcheng">
+									<a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>
+									个人中心
+									</a>
+								</div>
+							</div>
+							<div class="topMessage mini-cart">
+								<div class="menu-hd">
+									<a id="mc-menu-hd" href="<%=request.getContextPath() %>/jsps/shopingCar/shoppingCart.jsp" target="_top">
+										<i class="am-icon-shopping-cart  am-icon-fw"></i>
+										<span>购物车</span>
+										<strong id="J_MiniCartNum" class="h">0</strong>
+									</a>
+								</div>
+							</div>
+							<div class="topMessage favorite">
+						</ul>
+						</div>
+
+						<!--悬浮搜索框-->
+
+						<div class="nav white">
+							
+
+							<div class="search-bar pr">
+								<a name="index_none_header_sysc" href="#"></a>
+								<form>
+									<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+									<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+								</form>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+					</div>
+				</div>
+			</article>
+		</header>
+            <div class="nav-table">
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+								<li class="index"><a href="#">首页</a></li>
+                                <li class="qc"><a href="#">闪购</a></li>
+                                <li class="qc"><a href="#">限时抢</a></li>
+                                <li class="qc"><a href="#">团购</a></li>
+                                <li class="qc last"><a href="#">大包装</a></li>
+							</ul>
+						    
+						</div>
+			</div>
+			<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<!--标题 -->
+					<div class="user-safety">
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">账户安全</strong> / <small>Set&nbsp;up&nbsp;Safety</small></div>
+						</div>
+						<hr/>
+
+						<!--头像 -->
+						<div class="user-infoPic">
+
+							<div class="filePic">
+								<img class="am-circle am-img-thumbnail" src="<%=request.getContextPath()%>/User/personalInformation.do?method=download&personal_image=${map_personal.personal_image}" alt="" />
+							</div>
+
+							<p class="am-form-help">头像</p>
+
+							<div class="info-m">
+								<div><b>用户名：<i><%=((Map)session.getAttribute("map_personal")).get("personal_name")%></i></b></div>
+								<div class="u-level">
+									<span class="rank r2">
+							             <s class="vip1"></s><a class="classes" href="#">铜牌会员</a>
+						            </span>
+								</div>
+								<div class="u-safety">
+									<a href="<%=request.getContextPath()%>/User/personalsafety.do?method=querySafety&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>">
+									 账户安全
+									<span class="u-profile"><i class="bc_ee0000" style="width: 60px;" width="0">60分</i></span>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="check">
+							<ul>
+								<li>
+									<i class="i-safety-lock"></i>
+									<div class="m-left">
+										<div class="fore1">登录密码</div>
+										<div class="fore2"><small>为保证您购物安全，建议您定期更改密码以保护账户安全。</small></div>
+									</div>
+									<div class="fore3">
+										<a href="<%=request.getContextPath()%>/jsps/User/personal/safety/editpasswordpage.jsp">
+											<div class="am-btn am-btn-secondary">修改</div>
+										</a>
+									</div>
+								</li>
+								<li>
+									<i class="i-safety-wallet"></i>
+									<div class="m-left">
+										<div class="fore1">支付密码</div>
+										<div class="fore2"><small>启用支付密码功能，为您资产账户安全加把锁。</small></div>
+									</div>
+									<div class="fore3">
+										<a href="setpay.html">
+											<div class="am-btn am-btn-secondary">立即启用</div>
+										</a>
+									</div>
+								</li>
+								<li>
+									<i class="i-safety-iphone"></i>
+									<div class="m-left">
+										<div class="fore1">手机验证</div>
+										<div class="fore2"><small>您验证的手机：186XXXXXXXX 若已丢失或停用，请立即更换</small></div>
+									</div>
+									<div class="fore3">
+										<a href="bindphone.html">
+											<div class="am-btn am-btn-secondary">换绑</div>
+										</a>
+									</div>
+								</li>
+								<li>
+									<i class="i-safety-mail"></i>
+									<div class="m-left">
+										<div class="fore1">邮箱验证</div>
+										<div class="fore2"><small>您验证的邮箱：5831XXX@qq.com 可用于快速找回登录密码</small></div>
+									</div>
+									<div class="fore3">
+										<a href="email.html">
+											<div class="am-btn am-btn-secondary">换绑</div>
+										</a>
+									</div>
+								</li>
+								<li>
+									<i class="i-safety-idcard"></i>
+									<div class="m-left">
+										<div class="fore1">实名认证</div>
+										<div class="fore2"><small>用于提升账号的安全性和信任级别，认证后不能修改认证信息。</small></div>
+									</div>
+									<div class="fore3">
+										<a href="idcard.html">
+											<div class="am-btn am-btn-secondary">认证</div>
+										</a>
+									</div>
+								</li>
+								<li>
+									<i class="i-safety-security"></i>
+									<div class="m-left">
+										<div class="fore1">安全问题</div>
+										<div class="fore2"><small>保护账户安全，验证您身份的工具之一。</small></div>
+									</div>
+									<div class="fore3">
+										<a href="question.html">
+											<div class="am-btn am-btn-secondary">认证</div>
+										</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+				<!--底部-->
+				<div class="footer">
+					<div class="footer-hd">
+						<p>
+							<a href="#">轻松购</a>
+							<b>|</b>
+							<a href="<%=request.getContextPath()%>/indextow.jsp">商城首页</a>
+							<b>|</b>
+							<a href="#">支付宝</a>
+							<b>|</b>
+							<a href="#">物流</a>
+						</p>
+					</div>
+					<div class="footer-bd">
+						<p>
+							<a href="#">关于轻松购</a>
+							<a href="#">合作伙伴</a>
+							<a href="#">联系我们</a>
+							<a href="#">网站地图</a>
+							<em>© 2016-2026 XXXX 版权所有 <a href="http://www.cssmoban.com/" target="_blank" title="版权所有">版权所有</a> - Collect from</em>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<aside class="menu">
+				<ul>
+					<li class="person">
+						<a href="<%=request.getContextPath() %>/jsps/User/personalCenter .jsp">个人中心</a>
+					</li>
+					<li class="person">
+						<a href="#">个人资料</a>
+						<ul>
+							<li> <a href="<%=request.getContextPath()%>/User/personalInformation.do?method=query&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>">个人信息</a></li>
+							<li class="active"> <a href="<%=request.getContextPath()%>/User/personalsafety.do?method=querySafety&user_id=<%=((Map)session.getAttribute("user")).get("user_id")%>">安全设置</a></li>
+							<li> <a href="<%=request.getContextPath() %>/jsps/User/address.jsp">收货地址</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的交易</a>
+						<ul>
+							<li><a href="<%=request.getContextPath() %>/jsps/User/order.jsp">订单管理</a></li>
+							<li> <a href="<%=request.getContextPath() %>/jsps/User/change.jsp">退款售后</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的资产</a>
+						<ul>
+							<li> <a href="coupon.html">优惠券 </a></li>
+							<li> <a href="bonus.html">红包</a></li>
+							<li> <a href="bill.html">账单明细</a></li>
+						</ul>
+					</li>
+
+					<li class="person">
+						<a href="#">我的小窝</a>
+						<ul>
+							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="foot.html">足迹</a></li>
+							<li> <a href="comment.html">评价</a></li>
+							<li> <a href="news.html">消息</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</aside>
+		</div>
+
+	</body>
+</html>

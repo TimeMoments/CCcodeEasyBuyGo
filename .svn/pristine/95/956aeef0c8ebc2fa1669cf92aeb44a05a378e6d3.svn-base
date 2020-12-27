@@ -211,12 +211,10 @@
 						<div class="user-infoPic">
 
 							<div class="filePic">
-						<!--  
 								<span id="spid">
 									<input type="file" name="image" class="inputPic" onchange="imgPreview(this)"  allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" id="imgFile" >
 								</span>
-						-->
-								<img id="preview" class="am-circle am-img-thumbnail" src="<%=request.getContextPath()%>/User/personalInformation.do?method=download&personal_image=${map_personal.personal_image}" alt="" />
+								<img id="preview" class="am-circle am-img-thumbnail" src="images/getAvatar.do.jpg" alt="" />
 							</div>
 							
 							<p class="am-form-help">头像</p>
@@ -244,14 +242,13 @@
 
 						<!--个人信息 -->
 						<div class="info-main">
-							<form name="form1" method="post" action="<%=request.getContextPath()%>/User/personalInformation.do?method=edit&id=<%=((Map)session.getAttribute("map_personal")).get("user_id")%>" onsubmit="return checkForm()" enctype="multipart/form-data" >
+							<form name="form1" method="post" action="<%=request.getContextPath()%>/User.do?method=edit&id=<%=((Map)session.getAttribute("map_personal")).get("user_id")%>" onsubmit="return checkForm()" >
 								<div class="am-form-group">
 									<label for="user-name2" class="am-form-label">昵称:</label>
 									<div class="am-form-content">
-										<input type="text" class="form-control"  name="personal_name" value="${map_personal.personal_name }" placeholder="nickname">
+										<input type="text" class="form-control"  name="name" value="${map_personal.personal_name }" placeholder="nickname">
 									</div>
 								</div>
-
 <!--
 								<div class="am-form-group">
 									<label for="user-name" class="am-form-label">姓名</label>
@@ -351,12 +348,6 @@
 									</div>
 								</div>
 						 -->
-						 			<div class="am-form-group">
-									<label for="user-name2" class="am-form-label">头像:</label>
-									<div class="am-form-content">
-										<span id="spid"><input   type="file"   name="image"  onchange="imgPreview(this)" accept="image/*"   id="imgFile"/>
-									</div>
-								</div>
 								<div class="info-btn">
 									<div class="am-btn am-btn-danger">
 										<input class="button_btn_danger"  type="submit" value="保存修改"/>

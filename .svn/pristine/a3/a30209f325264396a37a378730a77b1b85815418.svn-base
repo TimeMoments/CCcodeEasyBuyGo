@@ -216,7 +216,7 @@
 									<input type="file" name="image" class="inputPic" onchange="imgPreview(this)"  allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" id="imgFile" >
 								</span>
 						-->
-								<img id="preview" class="am-circle am-img-thumbnail" src="<%=request.getContextPath()%>/User/personalInformation.do?method=download&personal_image=${map_personal.personal_image}" alt="" />
+								<img id="preview" class="am-circle am-img-thumbnail" src="images/getAvatar.do.jpg" alt="" />
 							</div>
 							
 							<p class="am-form-help">头像</p>
